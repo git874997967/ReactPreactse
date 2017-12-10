@@ -1,18 +1,88 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<link  rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
 <body>
-<div class="container">
-    <iframe src="html/demo01.html" height="1000px" width="960px"></iframe>
+<div id="container" class="container">
 </div>
-
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/react.js"></script>
+<script src="js/react-dom.js"></script>
+<script src="js/browser.min.js"></script>
+<script type="text/babel">
+    let TestClick;
+    TestClick = React.createClass({
+        getInitialState: function () {
+            console.log('init');
+            return {
+                test: "testInfo",
+                liked:false,
+            }
+        },
+        componentDidMount: function () {
+            console.log('Did');
+        },
+        componentWillMount: function () {
+            console.log('Will');
+        },
+        handleClick: function (event) {
 
-
+            this.setState({
+                liked:!this.state.liked,
+                text:event.target.value
+            });
+           let tipE= this.refs.tip;
+            (tipE.style.display==='none')?tipE.style.display='inline':tipE.style.display='none';
+            event.stopPropagation();
+            event.preventDefault();
+        },
+        render: function () {
+          let text=this.state.liked?"liked":"not like";
+            return (< div>
+                <button
+                    onClick={this.handleClick
+                    }>
+                    click
+                    me </button>
+            <span ref="tip">{text}</span>
+            </div>)
+        }
+    });
+    let TestInput = React.createClass({
+        getInitialState: function () {
+            return {
+                content: "abc"
+            }
+        },
+        handleChange:function(event){
+            this.setState({
+                content:event.target.value
+            })
+        },
+        render: function () {
+            let content=this.state.content;
+            return (
+                <label>
+                    <input type="text" value={content} onChange={this.handleChange}/><span>{content}</span>
+                </label>
+            )
+        }
+    });
+    ReactDOM.render(
+        /* put multi components in a encloure tag*/
+        <div>
+            <div>
+                <TestClick/>
+            </div>
+            <div>
+                <TestInput/>
+            </div>
+        </div>,
+        document.getElementById('container')
+    )
+</script>
 </html>
