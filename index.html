@@ -35,8 +35,10 @@
                 liked:!this.state.liked,
                 text:event.target.value
             });
-           let tipE= this.refs.tip;
-            (tipE.style.display==='none')?tipE.style.display='inline':tipE.style.display='none';
+          let tipE= this.refs.tip;
+            //  let tipR=$("#tip");
+            //  (tipR.style.display==='none')?tipR.style.display='inline':tipR.style.display='none';
+          (tipE.style.display==='none')?tipE.style.display='inline':tipE.style.display='none';
             event.stopPropagation();
             event.preventDefault();
         },
@@ -48,7 +50,7 @@
                     }>
                     click
                     me </button>
-            <span ref="tip">{text}</span>
+            <span ref="tip" id="tip">{text}</span>
             </div>)
         }
     });
